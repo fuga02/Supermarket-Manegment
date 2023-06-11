@@ -66,3 +66,20 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+/* _forms.scss:175 */
+.form-group {
+    margin-bottom: $form-group-margin-bottom;
+}
+
+/* _forms.scss:284 */
+.form-group {
+    display: flex;
+    flex: 0 0 auto;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 0;
+}
+/* _forms.scss:175 */
+$form-group-margin-bottom
+
+/* _forms.scss:284 */

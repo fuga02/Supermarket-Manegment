@@ -1,5 +1,6 @@
 ﻿@page "/categories"
 @inject IViewCategoriesUseCase ViewCategoriesUseCase
+@inject NavigationManager NavigationManager
 <h3>Manage Categories</h3>
 
 @{
@@ -9,6 +10,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,23 +20,33 @@
                         <tr>
                             <td>@category.Name</td>
                             <td>@category.Description</td>
+                            <td><button type="button" @onclick="@(() => EditCategory(category))" class="btn btn-link">Edit</button></td>
                         </tr>
                     }
                 </tbody>
             </table>
-        
     }
 }
 
+<br/>
+<button type="button" @onclick="AddAction" class="btn btn-primary" >Add Category</button>
 
 
 @code {
 
     private List<Category>? categories;
-
     protected override void OnInitialized()
     {
         categories = ViewCategoriesUseCase.Execute().ToList();
     }
 
+    private void AddAction()
+    {
+        NavigationManager.NavigateTo("/addcategory");
+    }
+
+    private void EditCategory(Category category)
+    {
+        NavigationManager.NavigateTo($"/editCategory/{category.CategoryId}");
+    }
 }

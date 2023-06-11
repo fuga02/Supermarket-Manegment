@@ -25,5 +25,30 @@ namespace Plugins.DataStore.InMemory
         {
             return categories;
         }
+
+        public void AddCategory(Category category)
+        {
+            var check = categories.Any(c => c.Name.Equals(category.Name, StringComparison.OrdinalIgnoreCase));
+            var maxId = categories.Max(c => c.CategoryId);
+            category.CategoryId = maxId + 1;
+            if (check)
+                return;
+            categories.Add(category);
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            var categoryToUpdate = GetCategoryById(category.CategoryId);
+            if (categoryToUpdate != null)
+            {
+                categoryToUpdate.Name = category.Name;
+                categoryToUpdate.Description = category.Description;
+            }
+        }
+
+        public Category GetCategoryById(int categoryId)
+        {
+            return categories.FirstOrDefault(c => c.CategoryId == categoryId)!;
+        }
     }
 }
