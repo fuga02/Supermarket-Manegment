@@ -1,19 +1,19 @@
 ﻿using CoreBusiness;
 using UseCases.DataStorePluginInterfaces;
 
-namespace UseCases;
+namespace UseCases.CategoriesUseCase;
 
-public class ViewCategoriesUseCase: IViewCategoriesUseCase
+public class ViewCategoriesUseCase : IViewCategoriesUseCase
 {
     private readonly ICategoryRepository _categoryRepository;
 
     public ViewCategoriesUseCase(ICategoryRepository categoryRepository)
     {
-        this._categoryRepository = categoryRepository;
+        _categoryRepository = categoryRepository;
     }
 
     public IEnumerable<Category> Execute()
     {
-       return _categoryRepository.GetCategories();
+        return _categoryRepository.GetCategories();
     }
 }

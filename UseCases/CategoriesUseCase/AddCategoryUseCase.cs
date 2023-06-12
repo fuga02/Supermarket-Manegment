@@ -1,7 +1,8 @@
 ﻿using CoreBusiness;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.UseCaseInterfaces;
 
-namespace UseCases;
+namespace UseCases.CategoriesUseCase;
 public class AddCategoryUseCase : IAddCategoryUseCase
 {
     private readonly ICategoryRepository _repository;
