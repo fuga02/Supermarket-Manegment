@@ -1,5 +1,6 @@
 using Plugins.DataStore.InMemory;
 using UseCases;
+using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
@@ -7,12 +8,13 @@ using WebApp.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(); 
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 //Dependency Injection for In-Memory Data Store
 builder.Services.AddScoped<ICategoryRepository,CategoryInMemoryRepository>();
+builder.Services.AddScoped<IProductRepository,ProductInMemoryRepository>();
 
 //Dependency Injection for Use Cases and Repositories
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
@@ -20,6 +22,7 @@ builder.Services.AddTransient<IAddCategoryUseCase, AddCategoryUseCase>();
 builder.Services.AddTransient<IEditCategoryUseCase, EditCategoryUseCase>();
 builder.Services.AddTransient<IGetCategoryByIdUseCase, GetCategoryByIdUseCase>();
 builder.Services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
+builder.Services.AddTransient<IViewProductsUseCase, ViewProductsUseCase>();
 
 var app = builder.Build();
 
