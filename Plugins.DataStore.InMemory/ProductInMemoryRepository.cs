@@ -21,4 +21,24 @@ public class ProductInMemoryRepository:IProductRepository
     {
         return products;
     }
+
+    public void AddProduct(Product product)
+    {
+        var check = products.Any(c => c.Name.Equals(product.Name, StringComparison.OrdinalIgnoreCase));
+        if (check)
+            return;
+
+        if (products is { Count: > 0 })
+        {
+
+            var maxId = products.Max(c => c.ProductId);
+            product.ProductId = maxId + 1;
+        }
+        else
+        {
+            product.ProductId = 1;
+        }
+
+        products.Add(product);
+    }
 }
