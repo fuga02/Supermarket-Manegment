@@ -10,15 +10,15 @@
         <EditForm Model="product" class="row g-3" OnInvalidSubmit="OnValidSubmit">
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <ValidationSummary></ValidationSummary>
-            <div class="form-group">
+            <div >
                 <label for="name">Name</label>
-                <InputText id="name" @bind-Value="product.Name" class="form-group"></InputText>
+                <InputText id="name" @bind-Value="product.Name" ></InputText>
             </div>
 
             <div >
                 <label for="category">Category</label>
                 <select id="category" @bind="product.CategoryId" class="form-control">
-                    <option value="0" selected="">
+                    <option  selected="">
                     </option>
                         @foreach (var cat in categories)
                         {
@@ -35,7 +35,7 @@
                 <InputNumber id="qty" @bind-Value="product.Quantity" class="form-control"></InputNumber>
             </div>
 
-            <button type="submit" class="btn btn-primary" >Save</button>
+            <button type="submit" class="btn btn-primary" @onclick="OnValidSubmit" >Save</button>
             <button type="submit" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
         </EditForm>
     }
