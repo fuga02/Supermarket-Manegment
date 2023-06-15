@@ -2,7 +2,7 @@
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases;
+namespace UseCases.CategoriesUseCase;
 
 
 
