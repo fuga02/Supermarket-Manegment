@@ -58,4 +58,13 @@ public class ProductInMemoryRepository:IProductRepository
     {
         return products.FirstOrDefault(p => p.ProductId == productId)!;
     }
+
+    public void DeleteProductById(int productId)
+    {
+        var product = GetProductById(productId);
+        if (product != null)
+        {
+            products.Remove(product);
+        }
+    }
 }
