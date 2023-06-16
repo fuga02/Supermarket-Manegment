@@ -2,6 +2,7 @@ using Plugins.DataStore.InMemory;
 using UseCases;
 using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.ProductsUseCase;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
 
