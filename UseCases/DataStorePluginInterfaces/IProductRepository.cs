@@ -9,4 +9,5 @@ public interface IProductRepository
     void UpdateProduct(Product product);
     Product GetProductById(int productId);
     void DeleteProductById(int productId);
+    IEnumerable<Product> GetProductsByCategoryId(int categoryId);
 }
