@@ -67,4 +67,9 @@ public class ProductInMemoryRepository:IProductRepository
             products.Remove(product);
         }
     }
+
+    public IEnumerable<Product> GetProductsByCategoryId(int categoryId)
+    {
+        return products.Where(c => c.CategoryId == categoryId);
+    }
 }
