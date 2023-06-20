@@ -16,7 +16,7 @@
 </div>
 
 @{
-    if (productsInCategory != null)
+    if (_productsInCategory != null)
     {
         <table class="table">
             <thead>
@@ -26,9 +26,9 @@
             </tr>
             </thead>
             <tbody>
-                 @foreach (var prod in productsInCategory)
+                 @foreach (var prod in _productsInCategory)
                  {
-                     <tr>
+                    <tr @onclick="()=> OnSelectProduct(prod)" style=" @(prod.ProductId == _selectedProductId ? "background-color: beige; cursor: pointer;" :"cursor: pointer;")">
                         <td>@prod.Name</td>
                         <td>@prod.Quantity</td>
                      </tr>
@@ -39,7 +39,11 @@
 }
 
 @code {
-    private IEnumerable<Product> productsInCategory;
+    private IEnumerable<Product>? _productsInCategory;
+    private int _selectedProductId;
+    [Parameter]
+    public EventCallback<Product> OnProductSelected { get; set; }
+
     private int selectedCategoryId;
 
     private int SelectedCategoryId
@@ -48,7 +52,8 @@
         set
         {
             selectedCategoryId = value;
-            productsInCategory = ViewProductsByCategoryId.Execute(value);
+            _productsInCategory = ViewProductsByCategoryId.Execute(value);
+            OnSelectProduct(null);
             StateHasChanged();
         }
     }
@@ -58,6 +63,12 @@
     protected override void OnInitialized()
     {
         categories = ViewCategoriesUseCase.Execute();
+    }
+
+    private void OnSelectProduct(Product? product)
+    {
+        OnProductSelected.InvokeAsync(product);
+        if(product != null) _selectedProductId = product.ProductId;
     }
 
 }
