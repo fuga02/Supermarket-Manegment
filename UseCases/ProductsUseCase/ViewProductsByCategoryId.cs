@@ -2,9 +2,9 @@
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases;
+namespace UseCases.ProductsUseCase;
 
-public class ViewProductsByCategoryId: IViewProductsByCategoryId
+public class ViewProductsByCategoryId : IViewProductsByCategoryId
 {
     private readonly IProductRepository _productRepository;
 

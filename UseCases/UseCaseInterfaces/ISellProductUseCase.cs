@@ -2,5 +2,5 @@
 
 public interface ISellProductUseCase
 {
-    void Execute(int productId, int? qytToSell);
+    void Execute(string cashierName,int productId, int qytToSell);
 }
