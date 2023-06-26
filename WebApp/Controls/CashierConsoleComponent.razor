@@ -31,7 +31,16 @@
 
     protected override void OnInitialized()
     {
-        
+        base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            
+            transactionComponent.LoadTransactions(cashierName);
+        }
     }
 
     private void SelectProduct(Product product)

@@ -13,8 +13,8 @@ public class GetTodayTransactionUseCase: IGetTodayTransactionUseCase
         _transactionRepository = transactionRepository;
     }
 
-    public IEnumerable<Transaction> Execute(string cashierName)
+    public IEnumerable<Transaction>? Execute(string cashierName)
     {
-        return _transactionRepository.GetByDay(cashierName, DateTime.Now);
+        return _transactionRepository.Get(cashierName);
     }
 }
