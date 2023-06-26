@@ -5,7 +5,7 @@ namespace Plugins.DataStore.InMemory
 {
     public class CategoryInMemoryRepository : ICategoryRepository
     {
-        private List<Category> categories;
+        private List<Category>? categories;
 
         public CategoryInMemoryRepository()
         {

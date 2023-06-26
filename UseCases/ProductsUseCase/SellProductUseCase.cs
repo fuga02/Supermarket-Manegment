@@ -17,8 +17,10 @@ public class SellProductUseCase : ISellProductUseCase
     {
         var product = _productRepository.GetProductById(productId);
         if (product == null) { return; }
+
+        _transactionUseCase.Execute(cashierName, productId, qytToSell);
         product.Quantity -= qytToSell;
+
         _productRepository.UpdateProduct(product);
-        _transactionUseCase.Execute(cashierName,productId,qytToSell);
     }
 }

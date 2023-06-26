@@ -33,6 +33,7 @@ builder.Services.AddTransient<IViewProductsByCategoryId, ViewProductsByCategoryI
 builder.Services.AddTransient<ISellProductUseCase, SellProductUseCase>();
 builder.Services.AddTransient<IRecordTransactionUseCase, RecordTransactionUseCase>();
 builder.Services.AddTransient<IGetTodayTransactionUseCase, GetTodayTransactionUseCase>();
+builder.Services.AddTransient<IGetTransactionsUseCase, GetTransactionsUseCase>();
 
 var app = builder.Build();
 
