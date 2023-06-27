@@ -1,4 +1,7 @@
 ﻿@page "/categories"
+
+@attribute [Authorize(Policy = "AdminOnly")]
+
 @inject IViewCategoriesUseCase ViewCategoriesUseCase
 @inject NavigationManager NavigationManager
 @inject IDeleteCategoryUseCase DeleteCategoryUseCase
