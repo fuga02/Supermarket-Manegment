@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Plugins.DataStore.InMemory;
+using Plugins.DataStore.SQL;
 using UseCases;
 using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
@@ -17,6 +19,12 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<ICategoryRepository,CategoryInMemoryRepository>();
 builder.Services.AddScoped<IProductRepository,ProductInMemoryRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+
+builder.Services.AddDbContext<MarketContext>(
+    options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("MarketDb"));
+    });
 
 //Dependency Injection for Use Cases and Repositories
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();

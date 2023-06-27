@@ -72,6 +72,19 @@ a, .btn-link {
 }
 
 /* _forms.scss:284 */
+@media print {
+    body * {
+        visibility: hidden
+    }
+    #printarea, #printarea * {
+        visibility: visible
+    }
+    #printarea {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
 .form-group {
     display: flex;
     flex: 0 0 auto;
@@ -83,3 +96,5 @@ a, .btn-link {
 $form-group-margin-bottom
 
 /* _forms.scss:284 */
+
+
