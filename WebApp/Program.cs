@@ -7,6 +7,8 @@ using UseCases.DataStorePluginInterfaces;
 using UseCases.ProductsUseCase;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
+using Microsoft.AspNetCore.Identity;
+using WebApp.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,16 +17,34 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", p=> p.RequireClaim("Position","Admin"));
+    options.AddPolicy("CashierOnly", p=> p.RequireClaim("Position", "Cashier"));
+
+});
+
 //Dependency Injection for In-Memory Data Store
-builder.Services.AddScoped<ICategoryRepository,CategoryInMemoryRepository>();
+/*builder.Services.AddScoped<ICategoryRepository,CategoryInMemoryRepository>();
 builder.Services.AddScoped<IProductRepository,ProductInMemoryRepository>();
-builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();*/
+
+//Dependency injection for ef core data store for SQl
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddDbContext<MarketContext>(
     options =>
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("MarketDb"));
     });
+builder.Services.AddDbContext<AccountContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MarketDb"));
+});
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AccountContext>();
 
 //Dependency Injection for Use Cases and Repositories
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
@@ -59,6 +79,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 

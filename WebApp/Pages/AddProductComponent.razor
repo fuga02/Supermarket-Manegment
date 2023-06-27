@@ -1,4 +1,6 @@
 ﻿@page "/addProduct"
+
+@attribute [Authorize(Policy = "AdminOnly")]
 <h3>Add Product</h3>
 
 @inject NavigationManager NavigationManager
